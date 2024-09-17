@@ -1,0 +1,47 @@
+#
+# Bazel MODULE
+#
+
+module(
+    name = "bazel-sandbox",
+    repo_name = "bazel-sandbox",
+)
+
+### Bazel Dependencies
+
+# Java
+### https://github.com/bazelbuild/rules_java
+
+bazel_dep(name = "rules_java", version = "7.3.1", dev_dependency = True)
+single_version_override(module_name = "rules_java", version = "7.3.1")
+
+custom_java = use_extension("//:java.bzl", "custom_java")
+use_repo(custom_java, "jdk11")
+
+register_toolchains("@jdk11//:all")
+
+# Maven
+### https://github.com/bazelbuild/rules_jvm_external
+
+bazel_dep(name = "rules_jvm_external", version = "5.3", dev_dependency = True)
+
+maven = use_extension("@rules_jvm_external//:extensions.bzl", "maven")
+
+maven.install(
+    name = "maven",
+    artifacts = [
+        "org.slf4j:slf4j-api:2.0.7",
+        "org.slf4j:slf4j-simple:2.0.7",
+        "junit:junit:4.13",
+    ],
+    fetch_sources = True,
+    lock_file = "//:maven_install.json",
+    repositories = ["https://repo1.maven.org/maven2"],
+)
+
+use_repo(maven, "maven")
+
+# Python
+### https://github.com/bazelbuild/rules_python
+
+bazel_dep(name = "rules_python", version = "0.33.1", dev_dependency = True)

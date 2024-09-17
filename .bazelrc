@@ -4,5 +4,5 @@
 
 common --experimental_downloader_config=downloader.cfg
 
-common --noenable_bzlmod
+common --enable_bzlmod
 build --experimental_strict_java_deps=off
