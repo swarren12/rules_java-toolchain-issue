@@ -1,0 +1,7 @@
+.idea/
+bazel-6.5.0-linux-x86_64
+bazel-bazel-sandbox
+bazel-bin
+bazel-out
+bazel-testlogs
+bazel-sandbox.iml

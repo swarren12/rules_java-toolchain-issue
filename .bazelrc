@@ -1,0 +1,8 @@
+#
+# Bazel Settings
+#
+
+common --experimental_downloader_config=downloader.cfg
+
+common --noenable_bzlmod
+build --experimental_strict_java_deps=off
