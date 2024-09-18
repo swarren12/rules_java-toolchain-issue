@@ -15,10 +15,14 @@ module(
 bazel_dep(name = "rules_java", version = "7.3.1", dev_dependency = True)
 single_version_override(module_name = "rules_java", version = "7.3.1")
 
-custom_java = use_extension("//:java.bzl", "custom_java")
-use_repo(custom_java, "jdk11")
+rules_java_ext = use_extension("@rules_java//java:extensions.bzl", "toolchains")
+use_repo(rules_java_ext, "remote_java_tools")
 
-register_toolchains("@jdk11//:all")
+custom_java = use_extension("//:java.bzl", "custom_java")
+use_repo(custom_java, "jdk11", "jdk11_toolchain_config_repo")
+
+register_toolchains("//:all")
+register_toolchains("@jdk11_toolchain_config_repo//:all")
 
 # Maven
 ### https://github.com/bazelbuild/rules_jvm_external

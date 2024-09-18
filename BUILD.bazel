@@ -1,3 +1,12 @@
 #
 # Root BUILD
 #
+load("@rules_java//toolchains:default_java_toolchain.bzl", "default_java_toolchain", "bootclasspath")
+
+default_java_toolchain(
+    name = "my_java11_toolchain",
+    java_runtime = "@jdk11//:jdk",
+    source_version = "11",
+    target_version = "11",
+    header_compiler_direct = ["@remote_java_tools//:TurbineDirect"],
+)
