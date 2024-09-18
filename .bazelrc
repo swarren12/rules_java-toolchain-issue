@@ -5,4 +5,10 @@
 common --experimental_downloader_config=downloader.cfg
 
 common --enable_bzlmod
+
+common --java_language_version=11
+common --tool_java_language_version=11
+common --java_runtime_version=custom_11
+common --tool_java_runtime_version=custom_11
+
 build --experimental_strict_java_deps=off
